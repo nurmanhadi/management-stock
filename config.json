@@ -1,0 +1,26 @@
+{
+    "app": {
+        "name": "management stock",
+        "version": "1.0.0",
+        "prefork": true
+    },
+    "server": {
+        "host": "0.0.0.0",
+        "port": 3000
+    },
+    "db": {
+        "user": "root",
+        "password": "root",
+        "host": "localhost",
+        "post": "3306",
+        "dbname": "management_stock",
+        "max_idle_conns": 10,
+        "max_open_conns": 100,
+        "conn_max_idletime": 5,
+        "conn_max_lifetime": 60
+    },
+    "jwt": {
+        "key": "nurmanhadi90918!*&@AHu",
+        "exp": 24
+    }
+}
