@@ -27,12 +27,15 @@ type BootstrapConfig struct {
 func Bootstrap(config *BootstrapConfig) {
 	// setup repositories
 	userRepository := repository.NewUserRepository(config.Db, config.Ctx, config.Log)
+	productRepository := repository.NewProductRepository(config.Db, config.Ctx, config.Log)
 
 	// setip usecase
 	userUsecase := usecase.NewUserUsecase(userRepository, config.Validator, config.Log, config.Config)
+	productUsecase := usecase.NewProductUsecase(productRepository, config.Validator, config.Log)
 
 	// setup handler
 	userHandler := http.NewUserHandler(userUsecase, config.Log)
+	productHandler := http.NewProductHandler(productUsecase, config.Log)
 
 	authMiddleware := &middleware.AuthMiddleware{
 		Config: config.Config,
@@ -42,6 +45,7 @@ func Bootstrap(config *BootstrapConfig) {
 	routeConfig := &route.RouteConfig{
 		App:            config.App,
 		UserHandler:    userHandler,
+		ProductHandler: productHandler,
 		AuthMiddleware: authMiddleware,
 	}
 	routeConfig.Router()

@@ -12,6 +12,7 @@ import (
 type IUserHandler interface {
 	Register(ctx *fiber.Ctx) error
 	Login(ctx *fiber.Ctx) error
+	Logout(ctx *fiber.Ctx) error
 }
 type userHandler struct {
 	userUsecase usecase.IUserUsecase
@@ -49,4 +50,7 @@ func (h *userHandler) Login(ctx *fiber.Ctx) error {
 		return response.Error(ctx, err)
 	}
 	return response.Success(ctx, 200, result)
+}
+func (h *userHandler) Logout(ctx *fiber.Ctx) error {
+	return ctx.SendStatus(204)
 }

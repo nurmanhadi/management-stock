@@ -45,10 +45,7 @@ func (r *userRepository) Create(user *entity.User) (int64, error) {
 		r.log.WithError(err).Error("failed to retrieve last insert ID for user create")
 		return 0, err
 	}
-	r.log.WithFields(logrus.Fields{
-		"user_id": id,
-		"email":   user.Email,
-	}).Info("user succesfully created")
+	r.log.Info("user succesfully created")
 
 	return id, nil
 }
@@ -65,9 +62,7 @@ func (r *userRepository) CountByEmail(email *string) (int, error) {
 		r.log.WithError(err).Error("failed to query row context for user count by email query")
 		return 0, err
 	}
-	r.log.WithFields(logrus.Fields{
-		"count": count,
-	}).Info("user succesfully count")
+	r.log.Info("user succesfully count")
 	return count, nil
 }
 func (r *userRepository) FindByEmail(email *string) (*entity.User, error) {
@@ -83,8 +78,6 @@ func (r *userRepository) FindByEmail(email *string) (*entity.User, error) {
 		r.log.WithError(err).Error("failed to query row context for user find by email query")
 		return nil, err
 	}
-	r.log.WithFields(logrus.Fields{
-		"email": email,
-	}).Info("user succesfully find by email")
+	r.log.Info("user succesfully find by email")
 	return user, nil
 }

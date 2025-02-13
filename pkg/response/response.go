@@ -23,6 +23,8 @@ func Error(ctx *fiber.Ctx, err error) error {
 		return ErrorR(ctx, 409, err.Error())
 	} else if errors.Is(err, exception.UserEmailOrPasswordWrong) {
 		return ErrorR(ctx, 400, err.Error())
+	} else if errors.Is(err, exception.ProductSkuAlreadyExists) {
+		return ErrorR(ctx, 409, err.Error())
 	} else if validatorErr, ok := err.(validator.ValidationErrors); ok {
 		var values []string
 		for _, fieldErr := range validatorErr {

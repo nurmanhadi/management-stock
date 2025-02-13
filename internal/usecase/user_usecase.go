@@ -64,7 +64,7 @@ func (s *userUsecase) Register(request *model.UserRegisterRequest) (*model.UserR
 		return nil, err
 	}
 	response := &model.UserResponseId{
-		UserId: userId,
+		Id: userId,
 	}
 	return response, nil
 }
